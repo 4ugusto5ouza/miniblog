@@ -52,7 +52,6 @@ const useAuthetication = () => {
         systemErrorMessage =
           "Ocorreu um erro. Tente novamente em alguns minutos!";
       }
-
       setError(systemErrorMessage);
     }
   };
@@ -60,6 +59,30 @@ const useAuthetication = () => {
   const logout = () => {
     checkIfIsCancelled();
     signOut(auth);
+  };
+
+  const login = async (data) => {
+    checkIfIsCancelled();
+    setLoading(true);
+    setError(false);
+
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.senha);
+      setLoading(false);
+    } catch (error) {
+      let systemErrorMessage;
+
+      if (error.message.includes("user-not-found")) {
+        systemErrorMessage = "Usuário não cadastrado.";
+      } else if (error.message.includes("wrong-password")) {
+        systemErrorMessage = "Senha incorreta!";
+      } else {
+        systemErrorMessage =
+          "Ocorreu um erro. Tente novamente em alguns minutos!";
+      }
+      setError(systemErrorMessage);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -72,6 +95,7 @@ const useAuthetication = () => {
     error,
     loading,
     logout,
+    login,
   };
 };
 

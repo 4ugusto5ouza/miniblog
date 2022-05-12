@@ -8,7 +8,7 @@ const Login = () => {
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
 
-  const { createUser, error: authError, loading } = useAuthetication();
+  const { login, error: authError, loading } = useAuthetication();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ const Login = () => {
       senha,
     };
 
-    const response = createUser(user);
+    const response = login(user);
   };
 
   useEffect(() => {
