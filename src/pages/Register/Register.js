@@ -1,6 +1,7 @@
 import styles from "./Register.module.css";
 
 import { useState, useEffect } from "react";
+import { useAuthetication } from "../../hooks/useAuthentication";
 
 const Register = () => {
   const [nome, setNome] = useState("");
@@ -9,13 +10,15 @@ const Register = () => {
   const [confirmSenha, setConfirmSenha] = useState("");
   const [error, setError] = useState("");
 
+  const { createUser, error: authError, loading } = useAuthetication();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     setError("");
 
     if (senha !== confirmSenha) {
-      setError("Confirmação de senha não corresponde a senha cadastrada!");
+      setError("A confirmação de senha não corresponde a senha informada!");
       return;
     }
 
@@ -25,8 +28,14 @@ const Register = () => {
       senha,
     };
 
-    console.log(user);
+    const response = createUser(user);
   };
+
+  useEffect(() => {
+    if (authError) {
+      setError(authError);
+    }
+  }, [authError]);
   return (
     <div className={styles.register}>
       <h1>Cadastre-se</h1>
@@ -77,7 +86,12 @@ const Register = () => {
           />
         </label>
         {error && <p className="error">{error}</p>}
-        <button className="btn">Cadastrar</button>
+        {!loading && <button className="btn">Cadastrar</button>}
+        {loading && (
+          <button className="btn" disabled>
+            Aguarde...
+          </button>
+        )}
       </form>
     </div>
   );
