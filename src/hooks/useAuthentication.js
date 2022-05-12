@@ -57,6 +57,11 @@ const useAuthetication = () => {
     }
   };
 
+  const logout = () => {
+    checkIfIsCancelled();
+    signOut(auth);
+  };
+
   useEffect(() => {
     return () => setCancelled(true);
   }, []);
@@ -66,6 +71,7 @@ const useAuthetication = () => {
     createUser,
     error,
     loading,
+    logout,
   };
 };
 
