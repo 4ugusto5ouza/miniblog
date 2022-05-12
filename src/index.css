@@ -1,14 +1,13 @@
 body {
   background-color: #f6fcff;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
   font-family: "Montserrat", sans-serif;
 }
 
 input::placeholder,
 textarea::placeholder {
   font-family: "Montserrat", sans-serif;
-  color: #aaa;
 }
 
 input:focus,
@@ -16,16 +15,16 @@ textarea:focus {
   outline: none;
 }
 
-nav a,
+a,
 nav button {
   text-decoration: none;
   background-color: transparent;
   border: none;
   color: #000;
-  transition: 0.3s;
+  transition: 0.4s;
   font-size: 1em;
   cursor: pointer;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-seri;
 }
 
 a:hover,
@@ -33,15 +32,16 @@ nav button:hover {
   color: #bbb;
 }
 
+/* form styles */
 form {
   max-width: 40%;
-  margin: 0px;
+  margin: 0 auto;
 }
 
 label {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1px;
+  margin-bottom: 1em;
 }
 
 label span {
@@ -55,8 +55,13 @@ textarea {
   box-sizing: border-box;
   border: none;
   border-bottom: 1px solid #ccc;
-  padding: 0.8em 0;
+  padding: 0.8em 0em;
   background-color: transparent;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #aaa;
 }
 
 .btn {
@@ -92,17 +97,14 @@ textarea {
 
 .btn.btn-outline:hover {
   background-color: #000;
-  color: #fff;
 }
 
 .btn.btn-danger:hover {
   background-color: #dc3545;
-  color: #fff;
 }
 
 button[disabled] {
   background-color: #aaa;
-  color: #fff;
 }
 
 .container .error {

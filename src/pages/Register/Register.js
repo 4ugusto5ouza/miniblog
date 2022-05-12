@@ -1,5 +1,7 @@
-import styles from "./Register.modules.css";
+import styles from "./Register.module.css";
+
 import { useState, useEffect } from "react";
+
 const Register = () => {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -9,9 +11,24 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    setError("");
+
+    if (senha !== confirmSenha) {
+      setError("Confirmação de senha não corresponde a senha cadastrada!");
+      return;
+    }
+
+    const user = {
+      nome,
+      email,
+      senha,
+    };
+
+    console.log(user);
   };
   return (
-    <div>
+    <div className={styles.register}>
       <h1>Cadastre-se</h1>
       <p>Crie seu usuário e compartilhe suas histórias!</p>
       <form onSubmit={handleSubmit}>
@@ -59,6 +76,7 @@ const Register = () => {
             onChange={(e) => setConfirmSenha(e.target.value)}
           />
         </label>
+        {error && <p className="error">{error}</p>}
         <button className="btn">Cadastrar</button>
       </form>
     </div>
