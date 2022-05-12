@@ -38,8 +38,7 @@ const useAuthetication = () => {
 
       return user;
     } catch (error) {
-      console.log(error.message);
-      console.log(typeof error.message);
+      setError(error);
     }
     setLoading(false);
   };
