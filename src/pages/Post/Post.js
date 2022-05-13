@@ -7,9 +7,24 @@ const Post = () => {
   const { document: post, loading, error } = useFetchDocumentById("posts", id);
 
   return (
-    <div>
+    <div className={styles.post_container}>
       {loading && <p>Carregando post...</p>}
-      {post && <div>{post.title}</div>}
+      {post && (
+        <div>
+          <h1>{post.title}</h1>
+          <img src={post.image} alt={post.title} />
+          <p>{post.body}</p>
+          <div  className={styles.tags}>
+              Tags:
+              {post.tags.map((tag, index) => (
+                <p key={index}>
+                  <span>#</span>
+                  {tag}
+                </p>
+              ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
