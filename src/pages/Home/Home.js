@@ -6,14 +6,19 @@ import styles from "./Home.module.css";
 
 const Home = () => {
   const [consulta, setConsulta] = useState("");
+  
   const {
     documents: posts,
     error: queryError,
     loading,
   } = useFetchDocuments("posts");
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (consulta) return navigate(`search?q=${consulta}`);
   };
   return (
     <div className={styles.home}>
@@ -33,7 +38,7 @@ const Home = () => {
         {loading && <p>Carregando...</p>}
         {posts &&
           posts.map((post) => {
-            return <PostDetails post={post} key={post.id}/>;
+            return <PostDetails post={post} key={post.id} />;
           })}
         {posts && posts.length === 0 && (
           <div className={styles.nopost}>
